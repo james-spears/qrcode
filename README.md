@@ -1,4 +1,4 @@
-# 2dbarcode
+# barcode2d
 
 > 2D barcode encoder/generator (QR Code).
 
@@ -13,7 +13,7 @@ This lib is based on "node-qrcode", which is based on "QRCode for JavaScript", w
 
 ## License
 
-[MIT](https://github.com/jameone/2dbarcode/license)
+[MIT](https://github.com/jameone/barcode2d/license)
 
 The word "QR Code" is registered trademark of:<br>
 DENSO WAVE INCORPORATED

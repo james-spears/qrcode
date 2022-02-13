@@ -1,6 +1,6 @@
 {
     "name": "@jameone/barcode2d",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "2D Barcode encoder (QRCode)",
     "keywords": [
         "qr",

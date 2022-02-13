@@ -178,4 +178,33 @@ describe('e2e', () => {
             expect(str).toEqual(exp);
         });
     });
+
+    describe('terminal', () => {
+        it('version undefined (default 1)', () => {
+            try {
+                encode('test', {
+                    type: 'terminal',
+                    version: 1,
+                });
+            } catch (e) {
+                expect(e).toBeInstanceOf(Error);
+            }
+        });
+
+        it('version', () => {
+            const str = encode('http://www.google.com', {
+                type: 'terminal',
+            });
+            expect(str).toBeTruthy(); // at least it does not error
+        });
+
+        
+        it('version', () => {
+            const str = encode('http://www.google.com', {
+                type: 'terminal',
+                small: true
+            });
+            expect(str).toBeTruthy(); // at least it does not error
+        });
+    });
 });

@@ -1,0 +1,55 @@
+name: On push
+on:
+    push:
+        branches: [main, dev]
+    workflow_dispatch:
+
+jobs:
+    autogenerate-sdk:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.REPO_PERSONAL_ACCESS_TOKEN }}
+                  submodules: true
+
+            - run: git config --global user.name 'James Spears 🤖'
+            - run: git config --global user.email 'james.w.spears@gmail.com'
+
+            - name: Setup node
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 16.x
+
+            - name: Install npm modules
+              run: npm install
+
+            # - name: Autogen SDK
+            #   run: |
+            #       npm run gen:proto
+            #       npm run gen:client
+
+            # - name: Run tests
+            #   run: npm test
+
+            - name: Git add
+              run: |
+                  git add .
+            - name: Git commit
+              run: git diff-index --quiet HEAD || git commit -m "Autogenerate SDK [skip ci]"
+
+            - name: Patch version
+              if: endsWith(github.ref, '/main')
+              run: echo "version=$(npm version patch -m 'Bump version v%s [skip ci]')" >> $GITHUB_ENV
+
+            - name: Prepatch version
+              if: endsWith(github.ref, '/dev')
+              run: echo "version=$(npm version prerelease -m 'Bump version v%s [skip ci]')" >> $GITHUB_ENV
+
+            - name: Git push
+              run: git push 
+
+            - name: Create Tag
+              run: git push origin ${{ env.version }}

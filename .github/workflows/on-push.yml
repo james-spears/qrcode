@@ -5,7 +5,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    autogenerate-sdk:
+    on-push:
         runs-on: ubuntu-latest
 
         steps:

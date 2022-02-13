@@ -1,6 +1,6 @@
 {
     "name": "@jameone/2dbarcode",
-    "version": "1.5.0",
+    "version": "0.0.0",
     "description": "2D Barcode encoder (QRCode)",
     "keywords": [
         "qr",
@@ -27,7 +27,6 @@
     },
     "types": "./dist/types/src/index.d.ts",
     "files": [
-        "src",
         "dist"
     ],
     "scripts": {

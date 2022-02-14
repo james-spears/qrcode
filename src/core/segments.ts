@@ -84,7 +84,6 @@ function getSegmentsFromString(dataStr: string): Segment[] {
                 data: obj.data,
                 mode: obj.mode,
                 length: obj.length,
-                index: -1,
             };
         });
 }
@@ -97,7 +96,7 @@ function getSegmentsFromString(dataStr: string): Segment[] {
  * @param  {Mode} mode     Segment mode
  * @return {Number}        Bit length
  */
-function getSegmentBitsLength(length: number, mode: Mode.Mode): number | undefined {
+function getSegmentBitsLength(length: number, mode: Mode.Mode): number {
     switch (mode) {
         case Mode.NUMERIC:
             return NumericData.getBitsLength(length);
@@ -106,6 +105,7 @@ function getSegmentBitsLength(length: number, mode: Mode.Mode): number | undefin
         case Mode.KANJI:
             return KanjiData.getBitsLength(length);
         case Mode.BYTE:
+        default:
             return ByteData.getBitsLength(length);
     }
 }
@@ -200,6 +200,8 @@ function buildNodes(segs: Segment[]): Segment[][] {
  * @param  {Number} version QR Code version
  * @return {Object}         Graph of all possible segments
  */
+
+
 function buildGraph(
     nodes: Segment[][],
     version: number
@@ -231,20 +233,16 @@ function buildGraph(
                         getSegmentBitsLength(
                             table[prevNodeId].lastCount + (node.length || 0),
                             node.mode
-                        ) ||
-                        0 -
-                            (getSegmentBitsLength(
-                                table[prevNodeId].lastCount,
-                                node.mode
-                            ) || 0);
+                        ) - getSegmentBitsLength(table[prevNodeId].lastCount, node.mode);
 
-                    table[prevNodeId].lastCount += node.length || 0;
+                    table[prevNodeId].lastCount += (node.length || 0);
                 } else {
-                    if (table[prevNodeId]) table[prevNodeId].lastCount = node.length || 0;
+                    if (table[prevNodeId]) table[prevNodeId].lastCount = (node.length || 0);
 
                     graph[prevNodeId][key] =
-                        getSegmentBitsLength(node.length || 0, node.mode) ||
-                        0 + 4 + Mode.getCharCountIndicator(node.mode, version); // switch cost
+                        getSegmentBitsLength((node.length || 0), node.mode) +
+                        4 +
+                        Mode.getCharCountIndicator(node.mode, version); // switch cost
                 }
             }
         }
@@ -344,17 +342,25 @@ export const fromArray = (array: (string | Segment)[]): Segment[] => {
  */
 export const fromString = (data: string, version: number): Segment[] => {
     const segs = getSegmentsFromString(data);
-
     const nodes = buildNodes(segs);
     const graph = buildGraph(nodes, version);
     const path = Dijkstra.findPath(graph.map, 'start', 'end');
-
     const optimizedSegs: Segment[] = [];
     for (let i = 1; i < path.length - 1; i++) {
         optimizedSegs.push(graph.table[path[i]].node);
     }
+    const mergedSegments = mergeSegments(optimizedSegs);
 
-    return fromArray(mergeSegments(optimizedSegs));
+    // console.debug('version', version);
+    // console.debug('data', data);
+    // console.debug('segs', JSON.stringify(segs));
+    // console.debug('nodes', JSON.stringify(nodes));
+    // console.debug('graph', JSON.stringify(graph));
+    // console.debug('optimized segemnts', optimizedSegs.length);
+    // console.debug('path', JSON.stringify(path));
+    // console.debug('megred segments', mergedSegments.length);
+
+    return fromArray(mergeSegments(mergedSegments));
 };
 
 /**

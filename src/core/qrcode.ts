@@ -1,7 +1,5 @@
 import * as Utils from './utils';
 import * as ECLevel from './error-correction-level';
-import { BitBuffer } from './bit-buffer';
-import { BitMatrix } from './bit-matrix';
 import * as AlignmentPattern from './alignment-pattern';
 import * as FinderPattern from './finder-pattern';
 import * as MaskPattern from './mask-pattern';
@@ -9,9 +7,11 @@ import * as ECCode from './error-correction-code';
 import * as ReedSolomonEncoder from './reed-solomon-encoder';
 import * as Version from './version';
 import * as FormatInfo from './format-info';
-import { getCharCountIndicator } from './mode';
 import * as Segments from './segments';
+import { getCharCountIndicator } from './mode';
 import { RGBAColor } from '../renderer/utils';
+import { BitBuffer } from './bit-buffer';
+import { BitMatrix } from './bit-matrix';
 
 /**
  * QRCode for JavaScript
@@ -407,7 +407,6 @@ function createSymbol(
     errorCorrectionLevel: ECLevel.ErrorCorrectionLevel,
     maskPattern: MaskPattern.Patterns
 ): QRCode {
-    let segments;
 
     let estimatedVersion: number | undefined = version;
 
@@ -423,8 +422,7 @@ function createSymbol(
 
     // Build optimized segments
     // If estimated version is undefined, try with the highest version
-    segments = Segments.fromString(data, estimatedVersion || 40);
-
+    const segments = Segments.fromString(data, estimatedVersion || 40);
     // Get the min version that can contain data
     const bestVersion = Version.getBestVersionForData(segments, errorCorrectionLevel);
     // If no version is found, data cannot be stored
@@ -524,7 +522,7 @@ export const create = (data: string, options: QRCodeOptions): QRCode => {
         ? options.errorCorrectionLevel
         : ECLevel.ErrorCorrectionLevel.M;
     let version = -1;
-    let mask = NaN;
+    const mask = NaN;
 
     if (typeof options !== 'undefined') {
         version = Version.from(options.version, version);

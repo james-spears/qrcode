@@ -94,35 +94,37 @@ export class Dijkstra {
             // In the nodes remaining in graph that have a known cost from s,
             // find the node, u, that currently has the shortest path from s.
             closest = open.pop();
-            u = closest?.value;
-            costOfSToU = closest?.cost;
+            if (closest) {
+                u = closest.value;
+                costOfSToU = closest.cost;
 
-            // Get nodes adjacent to u...
-            adjacentNodes = u ? graph[u] : {};
+                // Get nodes adjacent to u...
+                adjacentNodes = graph[u] || {};
 
-            // ...and explore the edges that connect u to those nodes, updating
-            // the cost of the shortest paths to any or all of those nodes as
-            // necessary. v is the node across the current edge from u.
-            for (v in adjacentNodes) {
-                if (Object.prototype.hasOwnProperty.call(adjacentNodes, v)) {
-                    // Get the cost of the edge running from u to v.
-                    costOfE = adjacentNodes[v];
+                // ...and explore the edges that connect u to those nodes, updating
+                // the cost of the shortest paths to any or all of those nodes as
+                // necessary. v is the node across the current edge from u.
+                for (v in adjacentNodes) {
+                    if (Object.prototype.hasOwnProperty.call(adjacentNodes, v)) {
+                        // Get the cost of the edge running from u to v.
+                        costOfE = adjacentNodes[v];
 
-                    // Cost of s to u plus the cost of u to v across e--this is *a*
-                    // cost from s to v that may or may not be less than the current
-                    // known cost to v.
-                    costOfSToUPlusCostOfE = costOfSToU || 0 + costOfE;
+                        // Cost of s to u plus the cost of u to v across e--this is *a*
+                        // cost from s to v that may or may not be less than the current
+                        // known cost to v.
+                        costOfSToUPlusCostOfE = costOfSToU + costOfE;
 
-                    // If we haven't visited v yet OR if the current known cost from s to
-                    // v is greater than the new cost we just found (cost of s to u plus
-                    // cost of u to v across e), update v's cost in the cost list and
-                    // update v's predecessor in the predecessor list (it's now u).
-                    costOfSToV = costs[v];
-                    firstVisit = typeof costs[v] === 'undefined';
-                    if (firstVisit || costOfSToV > costOfSToUPlusCostOfE) {
-                        costs[v] = costOfSToUPlusCostOfE;
-                        open.push(v, costOfSToUPlusCostOfE);
-                        u ? (predecessors[v] = u) : void 0;
+                        // If we haven't visited v yet OR if the current known cost from s to
+                        // v is greater than the new cost we just found (cost of s to u plus
+                        // cost of u to v across e), update v's cost in the cost list and
+                        // update v's predecessor in the predecessor list (it's now u).
+                        costOfSToV = costs[v];
+                        firstVisit = typeof costs[v] === 'undefined';
+                        if (firstVisit || costOfSToV > costOfSToUPlusCostOfE) {
+                            costs[v] = costOfSToUPlusCostOfE;
+                            open.push(v, costOfSToUPlusCostOfE);
+                            predecessors[v] = u;
+                        }
                     }
                 }
             }

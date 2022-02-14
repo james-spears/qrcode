@@ -26,27 +26,27 @@ enum PenaltyScores {
     N4 = 10,
 }
 
-// /**
-//  * Check if mask pattern value is valid
-//  *
-//  * @param  {Number}  mask    Mask pattern
-//  * @return {Boolean}         true if valid, false otherwise
-//  */
-// export const isValid = (mask: number): boolean => {
-//   return mask != null && !isNaN(mask) && mask >= 0 && mask <= 7
-// }
+/**
+ * Check if mask pattern value is valid
+ *
+ * @param  {Number}  mask    Mask pattern
+ * @return {Boolean}         true if valid, false otherwise
+ */
+export const isValid = (mask: number): boolean => {
+  return mask != null && !isNaN(mask) && mask >= 0 && mask <= 7
+}
 
-// /**
-//  * Returns mask pattern from a value.
-//  * If value is not valid, returns undefined
-//  *
-//  * @param  {Number|String} value        Mask pattern value
-//  * @return {Number}                     Valid mask pattern or undefined
-//  */
-// export const from = (value: number): Patterns | undefined => {
-//   // if (typeof value === 'number' && isValid(value)) return parseInt(value, 10)
-//   return isValid(value as number) ? value : undefined
-// }
+/**
+ * Returns mask pattern from a value.
+ * If value is not valid, returns undefined
+ *
+ * @param  {Number|String} value        Mask pattern value
+ * @return {Number}                     Valid mask pattern or undefined
+ */
+export const from = (value: number): Patterns | undefined => {
+  // if (typeof value === 'number' && isValid(value)) return parseInt(value, 10)
+  return isValid(value) ? value : undefined
+}
 
 /**
  * Find adjacent modules in row/column with the same color

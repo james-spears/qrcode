@@ -13,4 +13,9 @@ exp =
 str = qr.encode('http://www.google.com', { type: 'svg', errorCorrectionLevel: 0 });
 
 assert(str === exp);
+
+str = qr.encode('qrcode', { type: 'svg', errorCorrectionLevel: 0 });
+
+console.log(str)
+
 console.log('pass');

@@ -1,4 +1,4 @@
-export default function encodeUtf8(input: string): ArrayBufferLike {
+export default (input: string): ArrayBufferLike => {
     const result = [];
     const size = input.length;
 

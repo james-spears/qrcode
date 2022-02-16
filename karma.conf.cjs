@@ -18,7 +18,7 @@ module.exports = function (config) {
         karmaTypescriptConfig: {
             compilerOptions: {
                 target: 'esnext',
-            },
+            }
         },
 
         // preprocess matching files before serving them to the browser

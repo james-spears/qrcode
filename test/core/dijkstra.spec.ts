@@ -32,7 +32,7 @@ describe('dijkstra.js', function () {
                 g: { b: 1 },
             };
 
-            const path = findPath(graph, 'a', 'c');
+            let path = findPath(graph, 'a', 'c');
             expect(path).toEqual(['a', 'd', 'e', 'f', 'c']);
             path = findPath(graph, 'd', 'b');
             expect(path).toEqual(['d', 'b']);
@@ -66,26 +66,26 @@ describe('dijkstra.js', function () {
         //     });
     });
 
-    describe('.singleSourceShortestPaths()', function () {
-        it('should find all paths from a node', function () {
-            const graph = {
-                a: { b: 10, c: 100, d: 1 },
-                b: { c: 10 },
-                d: { b: 1, e: 1 },
-                e: { f: 1 },
-                f: { c: 1 },
-                g: { b: 1 },
-            };
+    // describe('.singleSourceShortestPaths()', function () {
+    //     it('should find all paths from a node', function () {
+    //         const graph = {
+    //             a: { b: 10, c: 100, d: 1 },
+    //             b: { c: 10 },
+    //             d: { b: 1, e: 1 },
+    //             e: { f: 1 },
+    //             f: { c: 1 },
+    //             g: { b: 1 },
+    //         };
 
-            // All paths from 'a'
-            const paths = Dijkstra.singleSourceShortestPaths(graph, 'a');
-            expect(paths).toEqual({
-                d: 'a',
-                b: 'd',
-                e: 'd',
-                f: 'e',
-                c: 'f',
-            });
-        });
-    });
+    //         // All paths from 'a'
+    //         const paths = Dijkstra.singleSourceShortestPaths(graph, 'a');
+    //         expect(paths).toEqual({
+    //             d: 'a',
+    //             b: 'd',
+    //             e: 'd',
+    //             f: 'e',
+    //             c: 'f',
+    //         });
+    //     });
+    // });
 });

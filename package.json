@@ -1,17 +1,17 @@
 {
-    "name": "@jameone/barcode2d",
+    "name": "@jameone/qrcode",
     "version": "0.0.0",
-    "description": "2D Barcode encoder (QRCode)",
+    "description": "QRCode 2D Barcode encoder",
     "keywords": [
         "qr",
         "code",
         "qrcode",
         "2D barcode"
     ],
-    "homepage": "http://github.com/jameone/barcode2d",
+    "homepage": "http://github.com/jameone/qrcode",
     "repository": {
         "type": "git",
-        "url": "git://github.com/jameone/barcode2d.git"
+        "url": "git://github.com/jameone/qrcode.git"
     },
     "license": "MIT",
     "type": "module",
@@ -30,7 +30,7 @@
         "dist"
     ],
     "scripts": {
-        "test": "karma start ./karma.conf.cjs",
+        "test": "karma start ./karma.conf.cjs handleBinaryFiles=true",
         "prebuild": "rm -rf ./dist",
         "build": "rollup -c rollup.config.js",
         "format": "prettier . --write",

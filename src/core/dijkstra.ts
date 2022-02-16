@@ -60,7 +60,7 @@ export class PriorityQueue {
 }
 
 export class Dijkstra {
-    private static singleSourceShortestPaths(
+    static singleSourceShortestPaths(
         graph: Record<string, Record<string, number>>,
         s: string,
         d: string
@@ -138,7 +138,7 @@ export class Dijkstra {
         return predecessors;
     }
 
-    private static extractShortestPathFromPredecessorList(
+    static extractShortestPathFromPredecessorList(
         predecessors: Record<string, string>,
         d: string
     ): string[] {

@@ -1,5 +1,5 @@
 {
-    "name": "@jameone/qrcode",
+    "name": "@james-spears/qrcode",
     "version": "0.0.1",
     "description": "QRCode 2D Barcode encoder",
     "keywords": [
@@ -8,10 +8,10 @@
         "qrcode",
         "2D barcode"
     ],
-    "homepage": "http://github.com/jameone/qrcode",
+    "homepage": "http://github.com/james-spears/qrcode",
     "repository": {
         "type": "git",
-        "url": "git://github.com/jameone/qrcode.git"
+        "url": "git://github.com/james-spears/qrcode.git"
     },
     "license": "MIT",
     "type": "module",

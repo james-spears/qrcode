@@ -77,7 +77,7 @@ export default [
             resolve({
                 extensions: ['.ts'],
             }),
-            typescript({ tsconfig: './tsconfig.json' }),
+            typescript(),
         ],
     },
     {

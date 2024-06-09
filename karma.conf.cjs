@@ -1,8 +1,3 @@
-// const resolve = require('@rollup/plugin-node-resolve');
-// const typescript = require('@rollup/plugin-typescript');
-// Karma configuration
-// Generated on Sun Feb 13 2022 14:03:02 GMT-0500 (Eastern Standard Time)
-
 module.exports = function (config) {
     config.set({
         // frameworks to use

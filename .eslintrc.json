@@ -8,6 +8,7 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "quotes": [2, "single"]
+        "quotes": [2, "single"],
+        "@typescript-eslint/no-duplicate-enum-values": ["off"]
     }
 }

@@ -37,7 +37,7 @@
         "lint": "eslint -c .eslintrc . --fix",
         "tidy": "npm run format && npm run lint && npm test",
         "doc": "typedoc ./src/index.ts",
-        "check": "prettier . --check --loglevel silent && eslint -c .eslintrc.json ."
+        "check": "prettier . --check --log-level silent && eslint -c .eslintrc.json ."
     },
     "devDependencies": {
         "@babel/core": "^7.24.6",

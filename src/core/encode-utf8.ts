@@ -50,4 +50,4 @@ export default (input: string): ArrayBufferLike => {
     }
 
     return new Uint8Array(result).buffer;
-}
+};

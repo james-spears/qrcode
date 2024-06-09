@@ -201,7 +201,6 @@ function buildNodes(segs: Segment[]): Segment[][] {
  * @return {Object}         Graph of all possible segments
  */
 
-
 function buildGraph(
     nodes: Segment[][],
     version: number
@@ -235,12 +234,12 @@ function buildGraph(
                             node.mode
                         ) - getSegmentBitsLength(table[prevNodeId].lastCount, node.mode);
 
-                    table[prevNodeId].lastCount += (node.length || 0);
+                    table[prevNodeId].lastCount += node.length || 0;
                 } else {
-                    if (table[prevNodeId]) table[prevNodeId].lastCount = (node.length || 0);
+                    if (table[prevNodeId]) table[prevNodeId].lastCount = node.length || 0;
 
                     graph[prevNodeId][key] =
-                        getSegmentBitsLength((node.length || 0), node.mode) +
+                        getSegmentBitsLength(node.length || 0, node.mode) +
                         4 +
                         Mode.getCharCountIndicator(node.mode, version); // switch cost
                 }

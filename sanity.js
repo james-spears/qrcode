@@ -16,6 +16,6 @@ assert(str === exp);
 
 str = qr.encode('qrcode', { type: 'svg', errorCorrectionLevel: 0 });
 
-console.log(str)
+console.log(str);
 
 console.log('pass');

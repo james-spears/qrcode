@@ -24,13 +24,10 @@ class QR {
         switch (type) {
             case 'svg':
                 return SvgRenderer;
-
             case 'utf8':
                 return Utf8Renderer;
-
             case 'canvas':
                 return CanvasRenderer;
-
             case 'terminal':
             default:
                 return TerminalRenderer;

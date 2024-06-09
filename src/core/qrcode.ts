@@ -407,7 +407,6 @@ function createSymbol(
     errorCorrectionLevel: ECLevel.ErrorCorrectionLevel,
     maskPattern: MaskPattern.Patterns
 ): QRCode {
-
     let estimatedVersion: number | undefined = version;
 
     if (estimatedVersion === -1) {
